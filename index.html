@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,5 +9,1803 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html> -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thenis — Legal Intelligence Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b0e17;
+        --ink-2: #111726;
+        --navy: #131c30;
+        --navy-2: #182338;
+        --paper: #eeeae0;
+        --paper-2: #e4dfd0;
+        --ink-text: #1b2030;
+        --brass: #b08d54;
+        --brass-bright: #c9a468;
+        --sage: #5f7a63;
+        --sage-bright: #7c9c82;
+        --muted: #8d93a5;
+        --muted-paper: #6e6a5c;
+        --line-dark: rgba(238, 234, 224, 0.12);
+        --line-paper: rgba(27, 32, 48, 0.14);
+        --red-flag: #a85c4a;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink-text);
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      .serif {
+        font-family: 'Source Serif 4', serif;
+      }
+      .mono {
+        font-family: 'IBM Plex Mono', monospace;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      ::selection {
+        background: var(--brass);
+        color: var(--ink);
+      }
+
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+      @media (max-width: 640px) {
+        .wrap {
+          padding: 0 20px;
+        }
+      }
+
+      section {
+        position: relative;
+      }
+      .dark {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .navy {
+        background: var(--navy);
+        color: var(--paper);
+      }
+      .paper-bg {
+        background: var(--paper);
+        color: var(--ink-text);
+      }
+      .paper2-bg {
+        background: var(--paper-2);
+        color: var(--ink-text);
+      }
+
+      .eyebrow {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--brass-bright);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .paper-bg .eyebrow,
+      .paper2-bg .eyebrow {
+        color: var(--brass);
+      }
+      .eyebrow::before {
+        content: '';
+        width: 22px;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.6;
+      }
+
+      /* ============ NAV — folder tabs ============ */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        padding-top: 14px;
+        pointer-events: none;
+      }
+      .nav-inner {
+        pointer-events: auto;
+        background: var(--ink);
+        border: 1px solid rgba(238, 234, 224, 0.14);
+        border-radius: 3px;
+        display: flex;
+        align-items: stretch;
+        box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+      }
+      .nav-logo {
+        font-family: 'Source Serif 4', serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--paper);
+        display: flex;
+        align-items: center;
+        padding: 0 18px;
+        border-right: 1px solid rgba(238, 234, 224, 0.14);
+        letter-spacing: 0.01em;
+      }
+      .nav-logo span {
+        color: var(--brass-bright);
+        font-style: italic;
+        margin-left: 2px;
+      }
+      .nav-tabs {
+        display: flex;
+      }
+      .nav-tabs a {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        border-right: 1px solid rgba(238, 234, 224, 0.08);
+        transition:
+          color 0.2s,
+          background 0.2s;
+        position: relative;
+      }
+      .nav-tabs a:last-child {
+        border-right: none;
+      }
+      .nav-tabs a:hover {
+        color: var(--paper);
+        background: rgba(238, 234, 224, 0.05);
+      }
+      @media (max-width: 900px) {
+        .nav-tabs {
+          display: none;
+        }
+      }
+
+      /* ============ HERO ============ */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 150px 0 90px;
+        background:
+          radial-gradient(1100px 500px at 82% -10%, rgba(176, 141, 84, 0.14), transparent 60%),
+          radial-gradient(900px 500px at 10% 110%, rgba(95, 122, 99, 0.1), transparent 60%), var(--ink);
+        border-bottom: 1px solid var(--line-dark);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 64px;
+        align-items: center;
+      }
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 56px;
+        }
+      }
+
+      .hero h1 {
+        font-size: clamp(34px, 4.6vw, 54px);
+        line-height: 1.08;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--paper);
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--brass-bright);
+        font-weight: 500;
+      }
+      .hero p.lead {
+        margin-top: 22px;
+        font-size: 16.5px;
+        line-height: 1.65;
+        color: var(--muted);
+        max-width: 480px;
+      }
+      .hero-cta {
+        margin-top: 34px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 14px 22px;
+        border-radius: 2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition:
+          transform 0.2s,
+          background 0.2s,
+          border-color 0.2s;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+      .btn-primary {
+        background: var(--brass-bright);
+        color: var(--ink);
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        background: #d4b47c;
+      }
+      .btn-ghost {
+        border-color: rgba(238, 234, 224, 0.3);
+        color: var(--paper);
+      }
+      .btn-ghost:hover {
+        border-color: var(--paper);
+      }
+      .paper-bg .btn-ghost,
+      .paper2-bg .btn-ghost {
+        border-color: rgba(27, 32, 48, 0.35);
+        color: var(--ink-text);
+      }
+
+      .hero-foot {
+        margin-top: 56px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line-dark);
+        display: flex;
+        gap: 36px;
+        flex-wrap: wrap;
+      }
+      .hero-foot div {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .hero-foot strong {
+        display: block;
+        color: var(--paper);
+        font-family: 'Source Serif 4', serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      /* ---- signature visual: chaos -> evidence pack ---- */
+      .signature {
+        position: relative;
+        height: 440px;
+      }
+      .messy-stack {
+        position: absolute;
+        left: 0;
+        top: 34px;
+        width: 200px;
+      }
+      .messy-card {
+        position: absolute;
+        width: 170px;
+        height: 120px;
+        background: var(--navy-2);
+        border: 1px solid rgba(238, 234, 224, 0.14);
+        border-radius: 3px;
+        padding: 12px;
+        box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5);
+      }
+      .messy-card .tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 9px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .messy-card .ln {
+        height: 5px;
+        background: rgba(238, 234, 224, 0.14);
+        border-radius: 2px;
+        margin-top: 9px;
+      }
+      .messy-card .ln.short {
+        width: 55%;
+      }
+      .mc1 {
+        transform: rotate(-9deg);
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      .mc2 {
+        transform: rotate(5deg);
+        top: 26px;
+        left: 34px;
+        z-index: 2;
+      }
+      .mc3 {
+        transform: rotate(-3deg);
+        top: 60px;
+        left: 14px;
+        z-index: 3;
+      }
+
+      .arrow-flow {
+        position: absolute;
+        left: 196px;
+        top: 150px;
+        width: 64px;
+        height: 2px;
+        z-index: 4;
+      }
+      .arrow-flow svg {
+        width: 100%;
+        height: 40px;
+        overflow: visible;
+      }
+
+      .evidence-card {
+        position: absolute;
+        right: 0;
+        top: 6px;
+        width: 280px;
+        background: var(--paper);
+        color: var(--ink-text);
+        border-radius: 4px;
+        padding: 22px 22px 20px;
+        box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.55);
+        z-index: 5;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .evidence-card .ehead {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px dashed var(--line-paper);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+      .evidence-card .ehead .et {
+        font-family: 'Source Serif 4', serif;
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .evidence-card .ehead .eid {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 9px;
+        color: var(--muted-paper);
+      }
+      .stamp {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 9.5px;
+        letter-spacing: 0.08em;
+        color: var(--sage);
+        border: 1.5px solid var(--sage);
+        border-radius: 20px;
+        padding: 3px 9px;
+        transform: rotate(-6deg);
+        white-space: nowrap;
+      }
+      .eline {
+        height: 6px;
+        background: rgba(27, 32, 48, 0.08);
+        border-radius: 2px;
+        margin-bottom: 9px;
+      }
+      .eline.w1 {
+        width: 96%;
+      }
+      .eline.w2 {
+        width: 82%;
+      }
+      .eline.w3 {
+        width: 60%;
+      }
+      .chip-row {
+        display: flex;
+        gap: 6px;
+        margin: 14px 0 16px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 9px;
+        letter-spacing: 0.02em;
+        background: rgba(95, 122, 99, 0.12);
+        color: var(--sage);
+        border: 1px solid rgba(95, 122, 99, 0.35);
+        border-radius: 20px;
+        padding: 3px 8px;
+      }
+      .conf-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .conf-row .cl {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 9px;
+        color: var(--muted-paper);
+        white-space: nowrap;
+      }
+      .conf-bar {
+        flex: 1;
+        height: 4px;
+        background: rgba(27, 32, 48, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .conf-bar i {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: var(--brass);
+        border-radius: 3px;
+        transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      @media (max-width: 980px) {
+        .signature {
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 36px;
+          align-items: center;
+        }
+        .messy-stack {
+          position: relative;
+          height: 150px;
+          left: 0;
+          top: 0;
+          margin: 0 auto;
+        }
+        .arrow-flow {
+          display: none;
+        }
+        .evidence-card {
+          position: relative;
+          right: auto;
+          top: auto;
+          width: 100%;
+          max-width: 320px;
+        }
+      }
+
+      /* ============ SECTION HEADERS ============ */
+      .sec {
+        padding: 110px 0;
+      }
+      @media (max-width: 720px) {
+        .sec {
+          padding: 76px 0;
+        }
+      }
+      .sec-head {
+        max-width: 640px;
+        margin-bottom: 56px;
+      }
+      .sec-head h2 {
+        font-size: clamp(26px, 3.4vw, 38px);
+        font-weight: 600;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      .sec-head p {
+        margin-top: 16px;
+        font-size: 15.5px;
+        line-height: 1.7;
+        opacity: 0.78;
+        max-width: 560px;
+      }
+      .stamp-mark {
+        position: absolute;
+        top: 44px;
+        right: 32px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: inherit;
+        opacity: 0.28;
+        writing-mode: vertical-rl;
+      }
+      @media (max-width: 720px) {
+        .stamp-mark {
+          display: none;
+        }
+      }
+
+      /* ============ PROBLEM ============ */
+      .problem-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border: 1px solid var(--line-paper);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      @media (max-width: 800px) {
+        .problem-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .problem-col {
+        padding: 38px 34px;
+      }
+      .problem-col.raw {
+        background: var(--paper-2);
+        border-right: 1px solid var(--line-paper);
+      }
+      .problem-col.clean {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .problem-col h3 {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .problem-col.raw h3 {
+        color: var(--red-flag);
+      }
+      .problem-col.clean h3 {
+        color: var(--sage-bright);
+      }
+      .problem-col ul {
+        list-style: none;
+      }
+      .problem-col li {
+        display: flex;
+        gap: 11px;
+        padding: 11px 0;
+        border-top: 1px solid var(--line-paper);
+        font-size: 14.5px;
+        line-height: 1.55;
+      }
+      .problem-col.clean li {
+        border-top: 1px solid var(--line-dark);
+        color: var(--muted);
+      }
+      .problem-col li:first-of-type {
+        border-top: none;
+      }
+      .problem-col li::before {
+        content: '—';
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .problem-col .big {
+        font-family: 'Source Serif 4', serif;
+        font-size: 19px;
+        font-weight: 500;
+        line-height: 1.4;
+        margin-top: 6px;
+        color: var(--paper);
+      }
+
+      /* ============ ARCHITECTURE STACK ============ */
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--line-dark);
+      }
+      .stack-row {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 0;
+        background: var(--navy-2);
+      }
+      .stack-row:nth-child(even) {
+        background: var(--navy);
+      }
+      .stack-label {
+        padding: 20px 22px;
+        border-right: 1px solid var(--line-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .stack-label .n {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: var(--brass-bright);
+        letter-spacing: 0.1em;
+        margin-bottom: 4px;
+      }
+      .stack-label .t {
+        font-family: 'Source Serif 4', serif;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .stack-items {
+        padding: 20px 22px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .stack-item {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--muted);
+        border: 1px solid var(--line-dark);
+        border-radius: 20px;
+        padding: 5px 12px;
+      }
+      .stack-item.new {
+        color: var(--brass-bright);
+        border-color: rgba(201, 164, 104, 0.4);
+      }
+      @media (max-width: 760px) {
+        .stack-row {
+          grid-template-columns: 1fr;
+        }
+        .stack-label {
+          border-right: none;
+          border-bottom: 1px solid var(--line-dark);
+          flex-direction: row;
+          gap: 10px;
+          align-items: baseline;
+        }
+      }
+
+      .case-file-note {
+        margin-top: 28px;
+        padding: 20px 24px;
+        border: 1px dashed rgba(238, 234, 224, 0.25);
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .case-file-note strong {
+        color: var(--paper);
+        font-family: 'Source Serif 4', serif;
+        font-weight: 600;
+      }
+
+      /* ============ USE CASES ============ */
+      .case-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line-paper);
+        border: 1px solid var(--line-paper);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      @media (max-width: 980px) {
+        .case-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .case-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .case-card {
+        background: var(--paper);
+        padding: 30px 24px;
+        display: flex;
+        flex-direction: column;
+        min-height: 280px;
+        transition: background 0.2s;
+      }
+      .case-card:hover {
+        background: var(--paper-2);
+      }
+      .case-card .tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: var(--sage);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .case-card h3 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.25;
+        margin-bottom: 12px;
+      }
+      .case-card p {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: var(--muted-paper);
+        flex: 1;
+      }
+      .case-card .buyers {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line-paper);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10.5px;
+        color: var(--muted-paper);
+        line-height: 1.6;
+      }
+      .case-card .buyers b {
+        display: block;
+        color: var(--ink-text);
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        margin-bottom: 3px;
+      }
+
+      /* ============ WORKFLOW TIMELINE ============ */
+      .timeline {
+        position: relative;
+        padding-left: 2px;
+      }
+      .tl-line {
+        position: absolute;
+        left: 23px;
+        top: 6px;
+        bottom: 6px;
+        width: 1px;
+        background: linear-gradient(var(--line-dark), var(--line-dark));
+      }
+      .tl-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .tl-num {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--ink);
+        border: 1px solid rgba(238, 234, 224, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 13px;
+        color: var(--brass-bright);
+        z-index: 2;
+        flex-shrink: 0;
+      }
+      .tl-item.final .tl-num {
+        background: var(--brass-bright);
+        color: var(--ink);
+        border-color: var(--brass-bright);
+      }
+      .tl-body {
+        padding-top: 8px;
+      }
+      .tl-body h4 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .tl-body p {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* ============ DIFFERENTIATION TABLE ============ */
+      .diff-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .diff-table th,
+      .diff-table td {
+        padding: 16px 18px;
+        text-align: left;
+        border-bottom: 1px solid var(--line-paper);
+        font-size: 13.5px;
+      }
+      .diff-table th {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted-paper);
+        font-weight: 500;
+      }
+      .diff-table td:first-child {
+        font-family: 'Source Serif 4', serif;
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .diff-table td,
+      .diff-table th {
+        text-align: center;
+      }
+      .diff-table td:first-child,
+      .diff-table th:first-child {
+        text-align: left;
+      }
+      .diff-table td.yes {
+        color: var(--sage);
+        font-weight: 700;
+      }
+      .diff-table td.no {
+        color: var(--red-flag);
+        font-weight: 700;
+      }
+      .diff-table td.maybe {
+        color: var(--brass);
+        font-weight: 700;
+      }
+      .diff-table tr.hero-col td:nth-child(4),
+      .diff-table tr th:nth-child(4) {
+        background: rgba(176, 141, 84, 0.08);
+      }
+      .diff-table th:nth-child(4) {
+        color: var(--brass);
+      }
+
+      /* ============ TOKENISATION STATS ============ */
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+      @media (max-width: 700px) {
+        .stat-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stat-box {
+        border: 1px solid var(--line-dark);
+        border-radius: 4px;
+        padding: 28px 24px;
+      }
+      .stat-box .num {
+        font-family: 'Source Serif 4', serif;
+        font-size: 42px;
+        font-weight: 600;
+        color: var(--brass-bright);
+      }
+      .stat-box .lbl {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .stat-box .bar {
+        margin-top: 16px;
+        height: 5px;
+        background: rgba(238, 234, 224, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .stat-box .bar i {
+        display: block;
+        height: 100%;
+        background: var(--brass-bright);
+        width: 0;
+        transition: width 1.2s ease;
+        border-radius: 3px;
+      }
+
+      /* ============ TRACTION ============ */
+      .segment-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 40px;
+      }
+      .segment-pill {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.03em;
+        border: 1px solid var(--line-paper);
+        border-radius: 20px;
+        padding: 8px 16px;
+        color: var(--ink-text);
+      }
+      .bullet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        max-width: 760px;
+      }
+      .bullet-list div {
+        display: flex;
+        gap: 14px;
+        font-size: 14.5px;
+        line-height: 1.6;
+      }
+      .bullet-list div::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--brass);
+        margin-top: 8px;
+        flex-shrink: 0;
+      }
+
+      /* ============ BUSINESS MODEL ============ */
+      .model-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line-dark);
+        border: 1px solid var(--line-dark);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      @media (max-width: 760px) {
+        .model-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .model-card {
+        background: var(--ink);
+        padding: 32px 26px;
+      }
+      .model-card .idx {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: var(--brass-bright);
+        letter-spacing: 0.1em;
+      }
+      .model-card h3 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 19px;
+        font-weight: 600;
+        margin: 12px 0 10px;
+      }
+      .model-card p {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      /* ============ STRATEGIC TIMELINE ============ */
+      .stimeline {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        position: relative;
+      }
+      @media (max-width: 760px) {
+        .stimeline {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stimeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 11px;
+        height: 1px;
+        background: var(--line-paper);
+      }
+      @media (max-width: 760px) {
+        .stimeline::before {
+          display: none;
+        }
+      }
+      .st-item {
+        position: relative;
+        padding-top: 34px;
+      }
+      .st-item::before {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 2px solid var(--brass);
+      }
+      .st-item .yr {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--brass);
+        letter-spacing: 0.06em;
+        margin-bottom: 8px;
+      }
+      .st-item h4 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .st-item p {
+        font-size: 13.5px;
+        color: var(--muted-paper);
+        line-height: 1.55;
+      }
+
+      /* ============ TEAM ============ */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+      }
+      @media (max-width: 900px) {
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .team-card {
+      }
+      .avatar {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 3px;
+        margin-bottom: 16px;
+        background: var(--navy-2);
+        border: 1px solid var(--line-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Source Serif 4', serif;
+        font-size: 34px;
+        font-weight: 600;
+        color: var(--brass-bright);
+      }
+      .team-card h4 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .team-card p {
+        font-size: 12.5px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      /* ============ FOOTER ============ */
+      .foot {
+        padding: 64px 0 40px;
+        border-top: 1px solid var(--line-dark);
+      }
+      .foot-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .foot .brand {
+        font-family: 'Source Serif 4', serif;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .foot .brand span {
+        color: var(--brass-bright);
+        font-style: italic;
+      }
+      .foot .meta {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10.5px;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+      }
+
+      /* ============ reveal on scroll ============ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--brass-bright);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-logo">Thenis<span>·</span></div>
+        <div class="nav-tabs">
+          <a href="#problem">Problem</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#cases">Use Cases</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#model">Model</a>
+          <a href="#team">Team</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Hub71 Application — Draft v1.0 · Confidential</div>
+            <h1>Legal intelligence infrastructure for <em>document&#8209;heavy</em>, risk&#8209;sensitive work.</h1>
+            <p class="lead">
+              Thenis Case File turns chaotic client documents — PDFs, scans, emails, spreadsheets — into a single,
+              structured, source-linked evidence pack. Every finding traces back to the page it came from.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#workflow">See how intake becomes evidence</a>
+              <a class="btn btn-ghost" href="#cases">View regulated use cases</a>
+            </div>
+            <div class="hero-foot">
+              <div><strong>4</strong>regulated workflows on one engine</div>
+              <div><strong>KYB</strong>first product release</div>
+              <div><strong>ADGM</strong>Hub71, Abu Dhabi</div>
+            </div>
+          </div>
+
+          <div class="signature">
+            <div class="messy-stack">
+              <div class="messy-card mc1">
+                <div class="tag">SCAN.TIFF</div>
+                <div class="ln"></div>
+                <div class="ln short"></div>
+              </div>
+              <div class="messy-card mc2">
+                <div class="tag">EMAIL.MSG</div>
+                <div class="ln"></div>
+                <div class="ln short"></div>
+              </div>
+              <div class="messy-card mc3">
+                <div class="tag">INTAKE.PDF</div>
+                <div class="ln"></div>
+                <div class="ln short"></div>
+              </div>
+            </div>
+            <div class="arrow-flow">
+              <svg viewBox="0 0 64 40">
+                <path d="M2 20 H56" stroke="#8D93A5" stroke-width="1" stroke-dasharray="3 4" />
+                <path d="M50 13 L58 20 L50 27" stroke="#8D93A5" stroke-width="1" fill="none" />
+              </svg>
+            </div>
+            <div class="evidence-card">
+              <div class="ehead">
+                <div>
+                  <div class="et">Matter Pack</div>
+                  <div class="eid">CF-0192 · KYB</div>
+                </div>
+                <div class="stamp">REVIEWED</div>
+              </div>
+              <div class="eline w1"></div>
+              <div class="eline w2"></div>
+              <div class="eline w3"></div>
+              <div class="chip-row">
+                <span class="chip">Doc 03 · p.12</span>
+                <span class="chip">Doc 07 · p.4</span>
+                <span class="chip">Doc 01 · p.1</span>
+              </div>
+              <div class="conf-row">
+                <span class="cl">CONFIDENCE</span>
+                <div class="conf-bar"><i id="confbar"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="sec paper-bg" id="problem">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">The Problem</div>
+          <h2>Unstructured intake and verification bottlenecks</h2>
+          <p>
+            In regulated workflows — KYB, KYC, tokenisation, claims, litigation, investment finance — chaotic client
+            documentation isn't just inconvenient. It creates real liability exposure.
+          </p>
+        </div>
+        <div class="problem-grid reveal">
+          <div class="problem-col raw">
+            <h3>Unstructured input</h3>
+            <ul>
+              <li>Documents arrive as PDFs, scans, emails and spreadsheets, with no shared structure</li>
+              <li>Manual review is slow, inconsistent and hard to audit</li>
+              <li>Gap analysis and contradiction checks are done by hand, case by case</li>
+              <li>Findings are rarely source-linked, so provenance is lost the moment a summary is written</li>
+            </ul>
+          </div>
+          <div class="problem-col clean">
+            <h3>Review-ready output</h3>
+            <p class="big">A single, structured, source-linked evidence pack.</p>
+            <ul>
+              <li>Every finding is traceable to the document it came from</li>
+              <li>Every deliverable carries a full audit trail</li>
+              <li>Human reviewer sign-off before anything ships</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="sec navy" id="architecture">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Architecture</div>
+          <h2>Case File is an organisation layer on Thenis Core</h2>
+          <p>
+            Thenis Core already exists and carries the reusable legal intelligence — ingestion, retrieval, risk engine,
+            audit trail. Case File and the RWA Finance Case File Copilot are extensions of that foundation, not separate
+            systems, built in seven layers.
+          </p>
+        </div>
+
+        <div class="stack reveal">
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">01</div>
+              <div class="t">Data Sources</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">Case comms (RDS/Aurora)</span><span class="stack-item">Documents (S3)</span
+              ><span class="stack-item">Historical corpus</span><span class="stack-item">Law-firm data</span
+              ><span class="stack-item">Finance product docs</span><span class="stack-item">Client matter files</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">02</div>
+              <div class="t">Ingestion &amp; Governance</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">Document parser &amp; OCR</span><span class="stack-item">PII redaction</span
+              ><span class="stack-item">Privilege classifier</span
+              ><span class="stack-item">Consent &amp; metadata tagger</span
+              ><span class="stack-item">Jurisdiction tagger</span><span class="stack-item">Access-policy tagger</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">03</div>
+              <div class="t">Knowledge &amp; Metadata</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">Vector database</span><span class="stack-item">Metadata index</span
+              ><span class="stack-item">Consent registry</span><span class="stack-item">Audit log</span
+              ><span class="stack-item">Domain taxonomies</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">04</div>
+              <div class="t">RAG &amp; Legal Intelligence</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">RAG query engine</span><span class="stack-item">Risk classifier</span
+              ><span class="stack-item">Clause &amp; section analyser</span
+              ><span class="stack-item">Attribution engine</span
+              ><span class="stack-item new">Entity &amp; authority extractor *</span
+              ><span class="stack-item">Confidence scoring</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">05</div>
+              <div class="t">Product Workflow</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">CaseFile Matter Pack</span
+              ><span class="stack-item">KYB Legal Document Check</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">06</div>
+              <div class="t">Review &amp; Evidence</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">Human reviewer workflow</span
+              ><span class="stack-item">Lawyer / compliance escalation</span
+              ><span class="stack-item">Reviewer override</span><span class="stack-item">Evidence-pack generator</span
+              ><span class="stack-item">Version history &amp; integrity</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">
+              <div class="n">07</div>
+              <div class="t">Interfaces &amp; Exports</div>
+            </div>
+            <div class="stack-items">
+              <span class="stack-item">Client / SME UI</span><span class="stack-item">Lawyer workspace</span
+              ><span class="stack-item">Compliance / product workspace</span
+              ><span class="stack-item">Admin &amp; configuration</span><span class="stack-item">PDF / DOCX export</span
+              ><span class="stack-item">API layer (later)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-file-note reveal">
+          <strong>* New for this release —</strong> the entity and authority extractor is a new component required by
+          the KYB workflow. The first release adds a banking product-workflow layer and a stronger evidence layer on top
+          of the architecture the platform already specifies.
+        </div>
+      </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="sec paper-bg" id="cases">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Use Cases</div>
+          <h2>One engine, four regulated workflows</h2>
+          <p>
+            Shared engine model: ingestion, retrieval, risk engine and audit trail from Thenis Core. Each new buyer
+            conversation adds a workflow, not a rebuild.
+          </p>
+        </div>
+        <div class="case-grid reveal">
+          <div class="case-card">
+            <div class="tag">KYC / KYB</div>
+            <h3>CaseFile KYC / KYB Companion</h3>
+            <p>
+              Structured intake and matter preparation for SME KYC and KYB documentation review. Turns unstructured
+              client material into clean, source-linked matter packs for the customer information file.
+            </p>
+            <div class="buyers">
+              <b>Early buyers</b>Banks, fintech, EMI &amp; payments entities, product, legal and risk teams
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="tag">Tokenisation</div>
+            <h3>CaseFile RWA Tokenisation</h3>
+            <p>
+              Structured intake and matter preparation for RWA tokenisation documentation. Builds the baseline legal
+              documentation required before an asset trades in primary or secondary markets.
+            </p>
+            <div class="buyers"><b>Early buyers</b>Banks, tokenisation companies, product, legal and risk teams</div>
+          </div>
+          <div class="case-card">
+            <div class="tag">Insurance</div>
+            <h3>CaseFile Insurance Claim</h3>
+            <p>
+              Structured intake and matter preparation for insurance claims. Turns messy claimant material into clean,
+              source-linked, review-ready matter packs.
+            </p>
+            <div class="buyers"><b>Early buyers</b>Insurance companies, fintech, product, legal and risk teams</div>
+          </div>
+          <div class="case-card">
+            <div class="tag">Litigation</div>
+            <h3>CaseFile Litigation Prep</h3>
+            <p>
+              Structured intake and matter preparation for individuals and corporations assembling solicitor-ready
+              documentation for litigation.
+            </p>
+            <div class="buyers">
+              <b>Early buyers</b>Law firms, individuals, corporations, product, legal and risk teams
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="sec dark" id="workflow">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Product Workflow</div>
+          <h2>From intake to review-ready evidence pack</h2>
+          <p>
+            Each AI output is flagged, source-linked and routed for human review before it forms part of a deliverable.
+          </p>
+        </div>
+        <div class="timeline reveal">
+          <div class="tl-line"></div>
+          <div class="tl-item">
+            <div class="tl-num">1</div>
+            <div class="tl-body">
+              <h4>Upload mixed files</h4>
+              <p>PDFs, scans, emails and spreadsheets, as they arrive.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">2</div>
+            <div class="tl-body">
+              <h4>Ingest and classify</h4>
+              <p>Document parsing, OCR and jurisdiction tagging.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">3</div>
+            <div class="tl-body">
+              <h4>PII and privilege check</h4>
+              <p>Redaction and privilege classification before anything is indexed.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">4</div>
+            <div class="tl-body">
+              <h4>Build chronology and issues</h4>
+              <p>Entities, authority and timeline extracted from the matter.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">5</div>
+            <div class="tl-body">
+              <h4>Detect gaps and contradictions</h4>
+              <p>Risk classifier flags what's missing or inconsistent.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">6</div>
+            <div class="tl-body">
+              <h4>Source-linked fact summary</h4>
+              <p>Every finding attributed back to its originating document.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-num">7</div>
+            <div class="tl-body">
+              <h4>Human review and override</h4>
+              <p>Lawyer or compliance escalation with full override rights.</p>
+            </div>
+          </div>
+          <div class="tl-item final">
+            <div class="tl-num">8</div>
+            <div class="tl-body">
+              <h4>Evidence pack export</h4>
+              <p>PDF / DOCX evidence pack and Customer Information File (CIF).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFFERENTIATION -->
+    <section class="sec paper-bg">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Differentiation</div>
+          <h2>Not a filing cabinet, not a black box</h2>
+          <p>
+            Static tools organise files but don't reason across them. Generic chatbots reason but can't prove where an
+            answer came from. Case File organises and verifies.
+          </p>
+        </div>
+        <div class="reveal" style="overflow-x: auto">
+          <table class="diff-table">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>Static tools</th>
+                <th>Generic LLM chatbots</th>
+                <th>Case File</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Source attribution on every output</td>
+                <td class="no">✗</td>
+                <td class="no">✗</td>
+                <td class="yes">✓</td>
+              </tr>
+              <tr>
+                <td>Mandatory human sign-off</td>
+                <td class="yes">✓</td>
+                <td class="no">✗</td>
+                <td class="yes">✓</td>
+              </tr>
+              <tr>
+                <td>Structural audit trail</td>
+                <td class="maybe">~</td>
+                <td class="no">✗</td>
+                <td class="yes">✓</td>
+              </tr>
+              <tr>
+                <td>Domain-specific taxonomies</td>
+                <td class="maybe">~</td>
+                <td class="no">✗</td>
+                <td class="yes">✓</td>
+              </tr>
+              <tr>
+                <td>Deterministic compliance guardrails</td>
+                <td class="no">✗</td>
+                <td class="no">✗</td>
+                <td class="yes">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENISATION -->
+    <section class="sec navy">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Tokenisation &amp; Banks</div>
+          <h2>The tokenisation opportunity behind bank compliance</h2>
+          <p>
+            RWA tokenisation is moving from pilot to production across banks, custodians and exchanges. Case File
+            Tokenisation builds the baseline legal documentation required before an asset can trade — ownership,
+            authority, provenance and KYB status — an area not covered by other tokenisation products.
+          </p>
+        </div>
+        <div class="stat-row reveal">
+          <div class="stat-box">
+            <div class="num">18</div>
+            <div class="lbl">Pilot</div>
+            <div class="bar"><i data-pct="18"></i></div>
+          </div>
+          <div class="stat-box">
+            <div class="num">46</div>
+            <div class="lbl">Early production</div>
+            <div class="bar"><i data-pct="46"></i></div>
+          </div>
+          <div class="stat-box">
+            <div class="num">82</div>
+            <div class="lbl">Scale</div>
+            <div class="bar"><i data-pct="82"></i></div>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: var(--muted); max-width: 600px">
+          Real-world asset tokenisation activity, indexed across pilot, early production and scale stages. Early buyers:
+          banks, tokenisation platforms, product, legal and risk teams.
+        </p>
+      </div>
+    </section>
+
+    <!-- TRACTION -->
+    <section class="sec paper-bg">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Traction</div>
+          <h2>Market momentum and early buyer engagement</h2>
+        </div>
+        <div class="segment-row reveal">
+          <span class="segment-pill">Banks</span>
+          <span class="segment-pill">Fintech / EMI</span>
+          <span class="segment-pill">Insurers</span>
+          <span class="segment-pill">Law firms</span>
+          <span class="segment-pill">Tokenisation platforms</span>
+        </div>
+        <div class="bullet-list reveal">
+          <div>Early buyer conversations spanning banks, fintech and payments entities, insurers and law firms.</div>
+          <div>
+            Existing partnership with a bank infrastructure provider, creating parallel systems and workflows for banks
+            covering tokenisation alongside their legacy models.
+          </div>
+          <div>Shared engine model means each new buyer conversation adds a workflow, not a rebuild.</div>
+          <div>
+            Regulatory tailwinds — UK cryptoasset rulemaking and ADGM digital asset frameworks — are pulling
+            institutional demand toward document-grade AI tooling.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUSINESS MODEL -->
+    <section class="sec dark" id="model">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Business Model</div>
+          <h2>A modular platform, multiple revenue lines</h2>
+          <p>
+            Land with one workflow inside an institution, expand across additional Case File use cases within the same
+            account.
+          </p>
+        </div>
+        <div class="model-grid reveal">
+          <div class="model-card">
+            <div class="idx">REVENUE LINE 01</div>
+            <h3>Platform licence</h3>
+            <p>Access to Thenis Core: ingestion, retrieval, risk engine, audit trail.</p>
+          </div>
+          <div class="model-card">
+            <div class="idx">REVENUE LINE 02</div>
+            <h3>Workflow modules</h3>
+            <p>
+              Case File Matter Pack, KYB Legal Document Check — tokenisation, insurance and litigation modules next.
+            </p>
+          </div>
+          <div class="model-card">
+            <div class="idx">REVENUE LINE 03</div>
+            <h3>Usage-based fees</h3>
+            <p>Evidence-pack generation and review volume.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIC FIT -->
+    <section class="sec paper-bg">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Strategic Fit</div>
+          <h2>Why now, and why Abu Dhabi</h2>
+          <p>
+            A Hub71 base positions Thenis inside the region's sovereign fund intake, institutional banking compliance
+            and RWA tokenisation corridor.
+          </p>
+        </div>
+        <div class="stimeline reveal">
+          <div class="st-item">
+            <div class="yr">2026</div>
+            <h4>UK rulemaking begins</h4>
+            <p>UK cryptoasset rulemaking and authorisation preparation gets underway.</p>
+          </div>
+          <div class="st-item">
+            <div class="yr">TODAY</div>
+            <h4>ADGM already mature</h4>
+            <p>A mature digital asset framework is already in operation in ADGM.</p>
+          </div>
+          <div class="st-item">
+            <div class="yr">LATE 2027</div>
+            <h4>Full UK regime</h4>
+            <p>The full UK cryptoasset regime is expected to take effect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="sec navy" id="team">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Team &amp; Growth Strategy</div>
+          <h2>Our team</h2>
+        </div>
+        <div class="team-grid reveal">
+          <div class="team-card">
+            <div class="avatar">YZ</div>
+            <h4>Yonni Zevi</h4>
+            <p>
+              Award-winning CTO (Innovate UK) with deep expertise in AI, data and general architecture. 20+ year career
+              spanning investment banking, technology and quantitative finance.
+            </p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">GS</div>
+            <h4>Gavin Sathianathan</h4>
+            <p>
+              Serial technology entrepreneur, ex Bain &amp; Company, one of the first hires at Facebook Europe. Led one
+              of Europe's largest digital and data transformations at Tesco.
+            </p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">CR</div>
+            <h4>Clive Rich</h4>
+            <p>
+              Founder of two law-tech companies, qualified barrister and lawyer for 40+ years, specialist in AI,
+              compliance and data protection law. Author of two books on business law and negotiation.
+            </p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">HB</div>
+            <h4>Haider Badat</h4>
+            <p>
+              Seasoned operator and scale-up leader across technology and logistics, with experience building
+              distributed teams across MENA, Australia, the UK and the US.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="dark foot">
+      <div class="wrap foot-grid">
+        <div>
+          <div class="brand">Thenis<span>·</span></div>
+          <div class="meta" style="margin-top: 8px">
+            Legal intelligence infrastructure for document-heavy, risk-sensitive work.
+          </div>
+        </div>
+        <div class="meta">Thenis | Confidential — Draft v1.0 for discussion</div>
+      </div>
+    </section>
+
+    <script>
+      // scroll reveal
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+      els.forEach((el) => io.observe(el));
+
+      // stat bars fill on view
+      const bars = document.querySelectorAll('.stat-box .bar i');
+      const barIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const pct = e.target.getAttribute('data-pct');
+              e.target.style.width = pct + '%';
+              barIo.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.4 },
+      );
+      bars.forEach((b) => barIo.observe(b));
+
+      // hero confidence bar
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const c = document.getElementById('confbar');
+          if (c) c.style.width = '94%';
+        }, 500);
+      });
+    </script>
   </body>
 </html>
